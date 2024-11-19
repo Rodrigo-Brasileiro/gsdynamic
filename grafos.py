@@ -3,26 +3,6 @@
 # Elas são interligadas continuamente, como mostra na matriz abaixo:
 
 linha_azul = [
-    # Tucuruvi   P.Inglesa  J.S.P.Ayrton   Santana   Carandiru   P.Tietê   Armênia   Tiradentes   Luz   S.Bento
-    [0,          1,         0,            0,        0,          0,        0,        0,          0,    0],  # Tucuruvi
-    [1,          0,         1,            0,        0,          0,        0,        0,          0,    0],  # Parada Inglesa
-    [0,          1,         0,            1,        0,          0,        0,        0,          0,    0],  # Jardim São Paulo
-    [0,          0,         1,            0,        1,          0,        0,        0,          0,    0],  # Santana
-    [0,          0,         0,            1,        0,          1,        0,        0,          0,    0],  # Carandiru
-    [0,          0,         0,            0,        1,          0,        1,        0,          0,    0],  # Portuguesa–Tietê
-    [0,          0,         0,            0,        0,          1,        0,        1,          0,    0],  # Armênia
-    [0,          0,         0,            0,        0,          0,        1,        0,          1,    0],  # Tiradentes
-    [0,          0,         0,            0,        0,          0,        0,        1,          0,    1],  # Luz
-    [0,          0,         0,            0,        0,          0,        0,        0,          1,    0],  # São Bento
-]
-
-#Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
-# correspondente, contendo todos os vértices visitados, e a ordem de visitação (20 pontos)
-
-# Para realizar essa calculo, vou utilizar o alcançáveis v3 visto em sala de aula:
-# Matriz de adjacências para as 10 primeiras estações da Linha Azul do Metrô de São Paulo
-
-linha_azul = [
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  # Tucuruvi
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0],  # Parada Inglesa
     [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],  # Jardim São Paulo
@@ -35,7 +15,12 @@ linha_azul = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],  # São Bento
 ]
 
-# Funções auxiliares para fila
+#Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
+# correspondente, contendo todos os vértices visitados, e a ordem de visitação (20 pontos)
+
+# Para realizar essa calculo, vou utilizar o alcançáveis v3 visto em sala de aula:
+# Matriz de adjacências para as 10 primeiras estações da Linha Azul do Metrô de São Paulo
+
 def cria_fila_nova():
     return {"proximo": 0, "lista": []}
 
