@@ -19,7 +19,7 @@ linha_azul = [
 #Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
 # correspondente, contendo todos os vértices visitados, e a ordem de visitação (20 pontos)
 
-# Para realizar essa calculo, vou utilizar o alcançáveis visto em sala de aula:
+# Para realizar essa calculo, vou utilizar o alcançáveis v3 visto em sala de aula:
 # Matriz de adjacências para as 10 primeiras estações da Linha Azul do Metrô de São Paulo
 
 linha_azul = [
@@ -52,20 +52,37 @@ def verifica_fila_vazia(fila):
     return fila["proximo"] >= len(fila["lista"])
 
 def alcancaveis(arestas, V):
-   num_vertices = len(arestas)
-   vistos = [False] * num_vertices
-   list_alcancaveis = [V]
-   fila = cria_fila_nova()
-   vistos[V] = True
-   insere_na_fila(fila,V)
-   while not verifica_fila_vazia(fila):
-       vertice = remove_da_fila(fila)
-       for j in range(num_vertices):
-           if arestas[vertice][j] == 1 and not vistos[j]:
-               list_alcancaveis.append(j)
-               vistos[j] = True
-               insere_na_fila(fila,j)
-   return list_alcancaveis
+    num_vertices = len(arestas)
+    fila = cria_fila_nova()
+    distancias = {V: 0}
+    insere_na_fila(fila, V)
+    
+    passo = 1  # Contador de passos para exibição
+    print(f"Passo {passo}:")
+    print(f"Vértice inicial: {V}")
+    print(f"Fila: {fila['lista']}")
+    print(f"Distâncias: {distancias}")
+    print("-" * 40)
+    
+    while not verifica_fila_vazia(fila):
+        vertice = remove_da_fila(fila)
+        passo += 1
+        print(f"Passo {passo}:")
+        print(f"Processando vértice: {vertice}")
+        print(f"Fila antes de processar: {fila['lista'][fila['proximo']:]}")
+        
+        for j in range(num_vertices):
+            if arestas[vertice][j] == 1 and j not in distancias:
+                distancias[j] = distancias[vertice] + 1
+                insere_na_fila(fila, j)
+                print(f"  Encontrou vértice {j}, distância atualizada para {distancias[j]}")
+        
+        print(f"Fila após processar: {fila['lista'][fila['proximo']:]}")
+        print(f"Distâncias: {distancias}")
+        print("-" * 40)
+    
+    return distancias
+
 
 resultado = alcancaveis(linha_azul, 0)  # Partindo de Tucuruvi (índice 0)
 print("Distâncias calculadas:", resultado)
