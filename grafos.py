@@ -71,3 +71,5 @@ def alcancaveis(arestas, V):
 
 resultado = alcancaveis(linha_azul, 0)  # Partindo de Tucuruvi (índice 0)
 print("Distâncias calculadas:", resultado)
+
+
