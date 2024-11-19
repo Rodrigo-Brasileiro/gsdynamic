@@ -79,13 +79,9 @@ def busca(arvore, chave):
     else:  # chave > arvore['raiz']
         return busca(arvore['direita'], chave)  
     
-
-
-    
 # Criando árvores diferentes com base em parâmetros diferentes, usei de todas para ter mais abrangência  
 arvore_por_pib = criar_arvore(paises, "pib") # envia como parâmetro dicionário escolhido e o o que deseja no dicinário
 arvore_por_populacao = criar_arvore(paises, "população")
-#arvore_por_nome = criar_arvore(paises, "pais")
 arvore_por_eolica = criar_arvore(paises, "energia_eólicaTWH")
 arvore_por_solar = criar_arvore(paises, "energia_solarTWH")
 arvore_por_nuclear = criar_arvore(paises, "energia_nuclearTWH")
@@ -100,11 +96,11 @@ novo_pais = "Noruega"
 dados_noruega = {"população": 5421240, "pib": 75382, "energia_eólicaTWH": 20, "energia_nuclearTWH": 0, "energia_solarTWH": 0.5}
 
 # Insere a nova entrada na árvore de energia eólica
-inserir(arvore_por_eolica, dados_noruega["energia_eólicaTWH"], novo_pais)
+inserir(arvore_por_eolica, dados_noruega["energia_eólicaTWH"], novo_pais) # para inserir o dado na árvore, basta colocar os parâmetros nessa ordem: ->
+# -> (arvore a qual a variável vai ser adicionada, o dado do novo que está sendo de parâmetro nessa árvore(nesse caso a energia eólica), variavel que armazena o nome do novo pais)
 
 
 #Exemplo de busca em árvores
-
 def buscar_e_printar(arvore, chave):
     pais = busca(arvore, chave)
     if pais is not None:
