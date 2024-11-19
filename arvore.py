@@ -6,13 +6,12 @@
 
 #paises = {"pais":"", "população":,
 #         "pib":,"energia_eólicaTWH": , "energia_nuclearTWH":,"energia_solarTWH":}
-from pprint import pprint
 
 from pprint import pprint
-
+# Nas energias(eólica, solar e nuclear) coloquei TWH que significa Tera Wats hora ao final do nome da chave 
 # Dicionário de países e dados
 paises = {
-    "Brasil": {"população": 203080756, "pib": 10296, "energia_eólicaTWH": 82, "energia_nuclearTWH": 15, "energia_solarTWH": 30},
+    "Brasil": {"população": 203080756, "pib": 10296, "energia_eólicaTWH": 82, "energia_nuclearTWH": 15, "energia_solarTWH": 30}, #
     "França": {"população": 68534000, "pib": 48012, "energia_eólicaTWH": 39, "energia_nuclearTWH": 295, "energia_solarTWH": 20},
     "Portugal": {"população": 10639726, "pib": 29341, "energia_eólicaTWH": 13, "energia_nuclearTWH": 0, "energia_solarTWH": 4},
     "Espanha": {"população": 48946035, "pib": 35789, "energia_eólicaTWH": 62, "energia_nuclearTWH": 59, "energia_solarTWH": 36},
@@ -34,7 +33,7 @@ paises = {
     "Finlândia": {"população": 5628931, "pib": 54774, "energia_eólicaTWH": 12, "energia_nuclearTWH": 25, "energia_solarTWH": 0.01}
 }
 
-# Função de inserção em árvore binária com critério
+# Função de inserção naD árvore binária
 def insere(arvore, chave, pais):
     if arvore == {}:
         arvore['raiz'] = chave
@@ -44,7 +43,7 @@ def insere(arvore, chave, pais):
         return
 
     if chave == arvore['raiz']:
-        return  # Já existe, não insere novamente.
+        return  # se a raiz já existe, ela não é adicionada novamente 
 
     if chave < arvore['raiz']:
         if arvore['esquerda'] == {}:
@@ -58,7 +57,7 @@ def insere(arvore, chave, pais):
         else:
             insere(arvore['direita'], chave, pais)
 
-# Função para criar a árvore binária com critério
+# Função para criar a árvore binária 
 def criar_arvore(paises, criterio):
     arvore = {}
     for pais, dados in paises.items():
@@ -69,67 +68,72 @@ def criar_arvore(paises, criterio):
 # Função de busca na árvore binária
 def busca(arvore, chave):
     if arvore == {}:
-        return None  # Caso base: árvore vazia
+        return None  
 
     if chave == arvore['raiz']:
-        return arvore['pais']  # Encontrou o valor
+        return arvore['pais']  
 
     if chave < arvore['raiz']:
-        return busca(arvore['esquerda'], chave)  # Busca na subárvore esquerda
+        return busca(arvore['esquerda'], chave)  
 
     else:  # chave > arvore['raiz']
-        return busca(arvore['direita'], chave)  # Busca na subárvore direita
+        return busca(arvore['direita'], chave)  
+    
 
-# Criando árvores com diferentes critérios de energia
-arvore_por_pib = criar_arvore(paises, "pib")
+
+    
+# Criando árvores diferentes com base em parâmetros diferentes, usei de todas para ter mais abrangência  
+arvore_por_pib = criar_arvore(paises, "pib") # envia como parâmetro dicionário escolhido e o o que deseja no dicinário
 arvore_por_populacao = criar_arvore(paises, "população")
-arvore_por_nome = criar_arvore(paises, "pais")
+#arvore_por_nome = criar_arvore(paises, "pais")
 arvore_por_eolica = criar_arvore(paises, "energia_eólicaTWH")
 arvore_por_solar = criar_arvore(paises, "energia_solarTWH")
 arvore_por_nuclear = criar_arvore(paises, "energia_nuclearTWH")
 
-# Exibindo as árvores criadas
+
+#Exemplo de inserções em árvores já criadas
+def inserir(arvore, chave, pais):
+    insere(arvore, chave, pais)
+    pprint(arvore)
+
+novo_pais = "Noruega"
+dados_noruega = {"população": 5421240, "pib": 75382, "energia_eólicaTWH": 20, "energia_nuclearTWH": 0, "energia_solarTWH": 0.5}
+
+# Insere a nova entrada na árvore de energia eólica
+inserir(arvore_por_eolica, dados_noruega["energia_eólicaTWH"], novo_pais)
+
+
+#Exemplo de busca em árvores
+
+def buscar_e_printar(arvore, chave):
+    pais = busca(arvore, chave)
+    if pais is not None:
+        print(f"O item com chave '{chave}' foi encontrado e corresponde ao país: {pais}.")
+    else:
+        print(f"O item com chave '{chave}' não foi encontrado na árvore.")
+
+# Exemplo de busca na árvore de energia eólica de um exemplo que existe, nesse caso o Brasil 
+chave_existente = 82 
+buscar_e_printar(arvore_por_eolica, chave_existente)
+
+# Exemplo de busca na árvore de energia eólica de um exemplo que não existe
+chave_inexistente = 999  
+buscar_e_printar(arvore_por_eolica, chave_inexistente)
+
+
+
+
+# Exemplos de algumas árvores criadas nas variáveis acima
 print("Árvore por energia eólica:")
 pprint(arvore_por_eolica)
 
-print("\nÁrvore por energia solar:")
-pprint(arvore_por_solar)
+#print("\nÁrvore por energia solar:")
+#pprint(arvore_por_solar)
 
-print("\nÁrvore por energia nuclear:")
-pprint(arvore_por_nuclear)
-
-# Exemplos de busca
-print("\nBusca por energia eólica 82 (Brasil):")
-print(busca(arvore_por_eolica, 82))  # Saída: Brasil
-
-print("\nBusca por energia solar 36 (Espanha):")
-print(busca(arvore_por_solar, 36))  # Saída: Espanha
-
-print("\nBusca por energia nuclear 295 (França):")
-print(busca(arvore_por_nuclear, 295))  # Saída: França
+#print("\nÁrvore por energia nuclear:")
+#pprint(arvore_por_nuclear)
 
 
 
 
-def menu():
-    print("1 - Lista de Países")
-    print("2 - Árvore de PIB dos países")
-    print("3 - Árvore de Energia eólica por países ")
-    print("4 - Árvore de Energia Nuclear por países")
-    print("5 - Árvore de energia solar por países")
-    print("6 - Inserir dado em alguma árvore")
-    print("7 - Árvore de população dos países")
-    print("8 - Buscar algum dado")
 
-    esc = int(input("Qual a escolha: "))
-    #if esc == 2:
-        #arvore_binaria = criar_arvore(paises)
-
-
-
-    
-# def menu_inserir():
-#     print("")
-#     print("")
-#     print("")
-#     print("")
