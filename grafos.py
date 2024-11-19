@@ -19,8 +19,9 @@ linha_azul = [
 #Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
 # correspondente, contendo todos os vértices visitados, e a ordem de visitação (20 pontos)
 
-# Para realizar essa calculo, vou utilizar o alcançáveis 3 visto em sala de aula:
+# Para realizar essa calculo, vou utilizar o alcançáveis visto em sala de aula:
 # Matriz de adjacências para as 10 primeiras estações da Linha Azul do Metrô de São Paulo
+
 linha_azul = [
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  # Tucuruvi
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0],  # Parada Inglesa
@@ -50,22 +51,21 @@ def remove_da_fila(fila):
 def verifica_fila_vazia(fila):
     return fila["proximo"] >= len(fila["lista"])
 
-# Função alcancaveis v3
 def alcancaveis(arestas, V):
-    num_vertices = len(arestas)
-    fila = cria_fila_nova()
-    distancias = {V: 0}
-    insere_na_fila(fila, V)
-    
-    while not verifica_fila_vazia(fila):
-        vertice = remove_da_fila(fila)
-        for j in range(num_vertices):
-            if arestas[vertice][j] == 1 and j not in distancias:
-                distancias[j] = distancias[vertice] + 1
-                insere_na_fila(fila, j)
-    
-    return distancias
+   num_vertices = len(arestas)
+   vistos = [False] * num_vertices
+   list_alcancaveis = [V]
+   fila = cria_fila_nova()
+   vistos[V] = True
+   insere_na_fila(fila,V)
+   while not verifica_fila_vazia(fila):
+       vertice = remove_da_fila(fila)
+       for j in range(num_vertices):
+           if arestas[vertice][j] == 1 and not vistos[j]:
+               list_alcancaveis.append(j)
+               vistos[j] = True
+               insere_na_fila(fila,j)
+   return list_alcancaveis
 
-# Testando a função
 resultado = alcancaveis(linha_azul, 0)  # Partindo de Tucuruvi (índice 0)
 print("Distâncias calculadas:", resultado)
