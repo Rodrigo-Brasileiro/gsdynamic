@@ -34,4 +34,4 @@ retorno_quadratico = conta_letras2(palavra)
 
 # Qual função terá maior consumo energético com listas de tamanho 1000?
 # - A função conta_letras2 consome mais energia,
-#   pois executa significativamente mais operações do que conta_letras.
+#   pois executa significativamente mais operações do que conta_letras. 

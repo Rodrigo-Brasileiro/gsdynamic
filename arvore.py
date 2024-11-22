@@ -1,3 +1,7 @@
+# NIKOLAS RODRIGUES MOURA DOS SANTOS – RM 551566
+# RODRIGO BRASILEIRO – RM 98952 
+# THIAGO JARDIM DE OLIVEIRA – RM 551624
+
 # {“pais”:”Brasil”, “população”: 200000000, “pib”: xxx, “porcentagem de energia eólica”: yyy, …}
 # Todos os dados foram pegos dos sites desponibilizados na tarefa, mas vou comentá-los aqui
 # Para a população: https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population
