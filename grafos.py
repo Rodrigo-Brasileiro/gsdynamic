@@ -15,7 +15,7 @@ linha_azul = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],  # São Bento
 ]
 
-#Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
+# Simule o algoritmo de cálculo de distâncias visto em sala, a partir de um dos vértices, e mostre uma lista 
 # correspondente, contendo todos os vértices visitados, e a ordem de visitação (20 pontos)
 
 # Para realizar essa calculo, vou utilizar o alcançáveis v3 visto em sala de aula:
